@@ -1,0 +1,9 @@
+/* Styles go here */
+.token{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border-bottom: 5px;
+    display: inline-block;
+
+}
