@@ -49,15 +49,19 @@ class App extends Component {
    
   }
   breed = (color1,color2)=>{
-    var newColor = "0x"
-    newColor = (parseInt(color1,16) + parseInt(color2,16)).toString()
-    console.log(parseInt(newColor,16))
-    console.log(newColor.toString());
+    console.log(color2,color1)
+    var newColor = (parseInt(color1,16) * parseInt(color2,16))
+    console.log(newColor.toString(16))
+    while(newColor > 16777215){
+      newColor = newColor/ parseInt('10',16)
+    }
+    newColor = parseInt(newColor)
+    newColor = newColor.toString(16)
+    console.log(newColor.toString(16))
     this.mint("#"+newColor);
   }
 
   mint = (color) =>{
-    console.log(color)
     this.state.contract.methods.mint(color).send({from:this.state.account}).once('receipt',(receipt)=>{
       this.setState({
         colors: [...this.state.colors, color]
@@ -120,8 +124,8 @@ class App extends Component {
               <h1> Breed </h1>
               <form onSubmit={(event)=>{
                   event.preventDefault()
-                  const color1 = this.color.value
-                  const color2 = this.color.value
+                  const color1 = this.color1.value
+                  const color2 = this.color2.value
                   var re = /[0-9A-Fa-f]{6}/g;
                   if(re.test(color1)){
                     if(parseInt(color1, 16) <= parseInt('FFFFFF', 16)){
@@ -141,8 +145,8 @@ class App extends Component {
                     this.breed(color1,color2);
                   }
                 }}>
-                 <input type='text' className='form-control mb-1' placeholder='e.g. #Color1' ref={(input)=> { this.color = input }}/>
-                 <input type='text' className='form-control mb-1' placeholder='e.g. #Color2' ref={(input)=> { this.color = input }}/>
+                 <input type='text' className='form-control mb-1' placeholder='e.g. #Color1' ref={(input)=> { this.color1 = input }}/>
+                 <input type='text' className='form-control mb-1' placeholder='e.g. #Color2' ref={(input)=> { this.color2 = input }}/>
                  <input type='submit' className='btn btn-block btn-primary' value='BREED'/>
                 </form>
               </div>
