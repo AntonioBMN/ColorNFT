@@ -11,16 +11,12 @@ contract Color is  ERC721Enumerable {
 
     constructor() ERC721("Color", "COLOR") {
     }
-    
-    function mint(string memory _color) public {
+
+    function mint(string memory  _color) public {
         require(!_colorExists[_color]);
         colors.push(_color);
         uint _id = colors.length;
         _mint(msg.sender, _id);
         _colorExists[_color] = true;
-    }
-
-    function breed (string memory _color1, string memory _color2) public {
-
     }
 }
