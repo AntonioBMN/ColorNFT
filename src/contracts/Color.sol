@@ -5,7 +5,6 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract Color is  ERC721Enumerable {
-    uint dnaModulus = 10 * 6;
     string[] public colors;
     mapping(string => bool) _colorExists;
 
